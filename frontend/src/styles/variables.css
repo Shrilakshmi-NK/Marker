@@ -1,0 +1,15 @@
+:root {
+  --primary-color: #ff0000;
+  --secondary-color: #282828;
+  --background-color: #fafafa;
+  --border-color: #ccc;
+  --text-color: #030303;
+  --text-secondary: #606060;
+  --success-color: #4caf50;
+  --warning-color: #ff9800;
+  --error-color: #f44336;
+  
+  --border-radius: 4px;
+  --box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}

@@ -1,0 +1,449 @@
+{
+  "info": {
+    "_postman_id": "marker-api-phase1",
+    "name": "Marker API - Phase 1",
+    "description": "YouTube Video Bookmark Manager API - Phase 1 Testing Collection",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "System",
+      "item": [
+        {
+          "name": "Health Check",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/health",
+              "host": ["{{baseUrl}}"],
+              "path": ["health"]
+            },
+            "description": "Check if API is running"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Videos - Create",
+      "item": [
+        {
+          "name": "Create Video (Long URL)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"JavaScript Fundamentals\",\n  \"youtube_url\": \"https://www.youtube.com/watch?v=jS4aFq5-91o\",\n  \"video_id\": \"jS4aFq5-91o\",\n  \"thumbnail_url\": \"https://img.youtube.com/vi/jS4aFq5-91o/0.jpg\",\n  \"duration_seconds\": 3600,\n  \"last_timestamp_seconds\": 0,\n  \"status\": \"not_started\",\n  \"notes\": \"Core JavaScript concepts - Variables, Functions, Objects\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/videos",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "videos"]
+            },
+            "description": "Create a new video bookmark with full YouTube URL"
+          },
+          "response": []
+        },
+        {
+          "name": "Create Video (Short URL)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"React Hooks Tutorial\",\n  \"youtube_url\": \"https://youtu.be/dQw4w9WgXcQ\",\n  \"video_id\": \"dQw4w9WgXcQ\",\n  \"thumbnail_url\": \"https://img.youtube.com/vi/dQw4w9WgXcQ/0.jpg\",\n  \"duration_seconds\": 1800,\n  \"status\": \"not_started\",\n  \"notes\": \"Learn modern React with Hooks\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/videos",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "videos"]
+            },
+            "description": "Create a video bookmark with short youtu.be URL"
+          },
+          "response": []
+        },
+        {
+          "name": "Create Video (With Timestamp)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"TypeScript Advanced Types\",\n  \"youtube_url\": \"https://www.youtube.com/watch?v=hBk4nV7q6-w&t=300s\",\n  \"video_id\": \"hBk4nV7q6-w\",\n  \"thumbnail_url\": \"https://img.youtube.com/vi/hBk4nV7q6-w/0.jpg\",\n  \"duration_seconds\": 2400,\n  \"status\": \"not_started\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/videos",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "videos"]
+            },
+            "description": "Create a video from URL that includes timestamp"
+          },
+          "response": []
+        },
+        {
+          "name": "Create Video (Minimal)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Python Basics\",\n  \"youtube_url\": \"https://www.youtube.com/watch?v=4F2m91eKyeE\",\n  \"video_id\": \"4F2m91eKyeE\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/videos",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "videos"]
+            },
+            "description": "Create a video with only required fields"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Videos - Read",
+      "item": [
+        {
+          "name": "Get All Videos",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/videos",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "videos"]
+            },
+            "description": "Retrieve all video bookmarks"
+          },
+          "response": []
+        },
+        {
+          "name": "Get All Videos (Paginated)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/videos?skip=0&limit=10",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "videos"],
+              "query": [
+                {
+                  "key": "skip",
+                  "value": "0",
+                  "disabled": false
+                },
+                {
+                  "key": "limit",
+                  "value": "10",
+                  "disabled": false
+                }
+              ]
+            },
+            "description": "Get videos with pagination"
+          },
+          "response": []
+        },
+        {
+          "name": "Get All Videos (Not Started)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/videos?status=not_started",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "videos"],
+              "query": [
+                {
+                  "key": "status",
+                  "value": "not_started",
+                  "disabled": false
+                }
+              ]
+            },
+            "description": "Filter videos by status: not_started"
+          },
+          "response": []
+        },
+        {
+          "name": "Get All Videos (Watching)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/videos?status=watching",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "videos"],
+              "query": [
+                {
+                  "key": "status",
+                  "value": "watching",
+                  "disabled": false
+                }
+              ]
+            },
+            "description": "Filter videos by status: watching"
+          },
+          "response": []
+        },
+        {
+          "name": "Get All Videos (Completed)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/videos?status=completed",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "videos"],
+              "query": [
+                {
+                  "key": "status",
+                  "value": "completed",
+                  "disabled": false
+                }
+              ]
+            },
+            "description": "Filter videos by status: completed"
+          },
+          "response": []
+        },
+        {
+          "name": "Search Videos",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/videos?search=javascript",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "videos"],
+              "query": [
+                {
+                  "key": "search",
+                  "value": "javascript",
+                  "disabled": false
+                }
+              ]
+            },
+            "description": "Search videos by title or notes (case-insensitive)"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Single Video",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/videos/{{videoId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "videos", "{{videoId}}"]
+            },
+            "description": "Get a single video by ID. Use variable {{videoId}} from a create response."
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Videos - Update",
+      "item": [
+        {
+          "name": "Update Status to Watching",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"watching\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/videos/{{videoId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "videos", "{{videoId}}"]
+            },
+            "description": "Update video status to 'watching'"
+          },
+          "response": []
+        },
+        {
+          "name": "Update Last Timestamp",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"last_timestamp_seconds\": 1850\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/videos/{{videoId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "videos", "{{videoId}}"]
+            },
+            "description": "Update the last watched position (in seconds)"
+          },
+          "response": []
+        },
+        {
+          "name": "Update Notes",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"notes\": \"Completed the basics, now understand closures. Need to practice async/await next.\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/videos/{{videoId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "videos", "{{videoId}}"]
+            },
+            "description": "Update video notes"
+          },
+          "response": []
+        },
+        {
+          "name": "Update Multiple Fields",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"completed\",\n  \"last_timestamp_seconds\": 3600,\n  \"notes\": \"Finished! Great overview of JavaScript concepts.\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/videos/{{videoId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "videos", "{{videoId}}"]
+            },
+            "description": "Update multiple fields at once"
+          },
+          "response": []
+        },
+        {
+          "name": "Update to Completed",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"completed\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/videos/{{videoId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "videos", "{{videoId}}"]
+            },
+            "description": "Mark video as completed"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Videos - Delete",
+      "item": [
+        {
+          "name": "Delete Video",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/videos/{{videoId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "videos", "{{videoId}}"]
+            },
+            "description": "Delete a video bookmark"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Videos - Special",
+      "item": [
+        {
+          "name": "Get Resume URL",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/videos/resume/{{videoId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "videos", "resume", "{{videoId}}"]
+            },
+            "description": "Get a YouTube URL that resumes from the last watched position"
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8000",
+      "type": "string"
+    },
+    {
+      "key": "videoId",
+      "value": "",
+      "type": "string",
+      "description": "Replace with actual video ID from a create response"
+    }
+  ]
+}
